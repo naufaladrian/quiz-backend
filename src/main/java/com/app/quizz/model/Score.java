@@ -32,12 +32,6 @@ public class Score extends Audit {
     @Column(name = "score")
     private float score;
 
-    @Column(name = "total_question")
-    private int totalQuestion;
-
-    @Column(name = "question_answered")
-    private int questionAnswered;
-
     @OneToOne
     @JoinColumn(name = "school_id")
     private School schoolId;

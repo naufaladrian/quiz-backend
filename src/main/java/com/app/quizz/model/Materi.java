@@ -7,7 +7,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -45,4 +47,7 @@ public class Materi extends Audit {
     @OneToOne
     @JoinColumn(name = "school_id")
     private School schoolId;
+
+    @Transient
+    private List<Question> questions =new ArrayList<>();
 }
