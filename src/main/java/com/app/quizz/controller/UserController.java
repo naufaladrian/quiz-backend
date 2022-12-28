@@ -9,6 +9,7 @@ import com.app.quizz.response.CommonResponseGenerator;
 import com.app.quizz.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,9 +21,9 @@ public class UserController {
     @Autowired
     private UserService userService;
     @PreAuthorize("hasAnyAuthority('USER','ADMIN')")
-    @GetMapping("/{id}")
-    public CommonResponse<User> getUserById (@PathVariable("id") String id){
-        return CommonResponseGenerator.successResponse(userService.getUserById(id));
+    @GetMapping(produces= MediaType.APPLICATION_JSON_VALUE)
+    public CommonResponse<User> getUserById (){
+        return CommonResponseGenerator.successResponse(userService.getUserById());
     }
     @PreAuthorize("hasAuthority('USER')")
     @PutMapping("/{id}")

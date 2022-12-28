@@ -1,6 +1,7 @@
 package com.app.quizz.service;
 
 
+import com.app.quizz.config.AuthenticationFacade;
 import com.app.quizz.dto.LoginDTO;
 import com.app.quizz.dto.UserDTO;
 import com.app.quizz.exception.BusinessException;
@@ -40,11 +41,10 @@ public class UserServiceImpl implements UserService {
     private UserTrafficRepository userTrafficRepository;
     private UserDetailServiceImpl userDetailservice;
     private RoleRepository roleRepository;
-
     private SchoolRepository schoolRepository;
-
+    private AuthenticationFacade authenticationFacade;
     @Autowired
-    public UserServiceImpl(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtProvider jwtProvider, UserRepository userRepository, TemporaryTokenRepository temporaryTokenRepository, UserDetailServiceImpl userDetailservice, RoleRepository roleRepository, UserTrafficRepository userTrafficRepository, SchoolRepository schoolRepository) {
+    public UserServiceImpl(PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtProvider jwtProvider, UserRepository userRepository, TemporaryTokenRepository temporaryTokenRepository, UserDetailServiceImpl userDetailservice, RoleRepository roleRepository, UserTrafficRepository userTrafficRepository, SchoolRepository schoolRepository, AuthenticationFacade authenticationFacade) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtProvider = jwtProvider;
@@ -54,6 +54,7 @@ public class UserServiceImpl implements UserService {
         this.roleRepository = roleRepository;
         this.userTrafficRepository = userTrafficRepository;
         this.schoolRepository = schoolRepository;
+        this.authenticationFacade=authenticationFacade;
     }
 
     //GET USER IP ADDRESS
@@ -172,8 +173,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserById(String id) {
-        return userRepository.findById(id).orElseThrow(() -> new NotFoundException("Id Not Found"));
+    public User getUserById() {
+        return authenticationFacade.getAuthentication();
     }
 
     @Override

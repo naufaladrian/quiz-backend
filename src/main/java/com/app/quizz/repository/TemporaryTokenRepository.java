@@ -18,5 +18,6 @@ public interface TemporaryTokenRepository extends JpaRepository<TemporaryToken, 
 
     Optional<TemporaryToken> assffafsa(String token, Date expired);
 
+
 //    Boolean existsByUsername(String username);
 }

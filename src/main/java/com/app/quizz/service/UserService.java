@@ -11,7 +11,7 @@ import java.util.Map;
 public interface UserService {
     TemporaryToken connect(String userId);
 
-    User getUserById (String id);
+    User getUserById ();
     User updateUser(String id, User user);
 
     User regToSchool(String userId, String schoolId);

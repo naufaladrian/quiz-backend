@@ -41,7 +41,7 @@ public class User extends Audit {
     @Column(name = "url_profile")
     private String urlProfile;
 
-    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role roleId;
 
